@@ -16,13 +16,13 @@ public class InsertionSort {
         //Integer[] arr = SortTestHelper.generateRandomArray(10000, 0, 10000);
         Integer[] arr = SortTestHelper.generateNearlyOrderedArray(10000, 20);
         Long begin = System.currentTimeMillis();
-        better_sort(arr, arr.length);
+        better_sort(arr);
         System.out.println("insertion sort 执行的时间为 : " + (System.currentTimeMillis() - begin));
     }
 
-    private static void sort(Comparable[] arr, int len){
+    private static void sort(Comparable[] arr){
 
-        for (int i = 1; i < len; i++){
+        for (int i = 1; i < arr.length; i++){
             for (int j = i; j > 0 && SortTestHelper.less(arr[j], arr[j - 1]); j--){
                 SortTestHelper.exch(arr, j, j - 1);
             }
@@ -31,9 +31,9 @@ public class InsertionSort {
         assert SortTestHelper.isSorted(arr);
     }
 
-    public static void better_sort(Comparable[] arr, int len){
+    public static void better_sort(Comparable[] arr){
 
-        for (int i = 1; i < len; i++){
+        for (int i = 1; i < arr.length; i++){
             int j;
             Comparable temp = arr[i];
             for(j=i-1; j>=0 && SortTestHelper.less(temp, arr[j]); j--){
