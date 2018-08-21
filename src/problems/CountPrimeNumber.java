@@ -1,4 +1,4 @@
-/*
+package problems;/*
 输入描述: 　　输入包括多组数据。
 　　每组数据仅有一个整数n (1≤n≤10000000)。
 
@@ -6,7 +6,7 @@
 
  */
 
-public class NowCoder {
+public class CountPrimeNumber {
 
     public static void main(String[] args) {
         System.out.println(guess(100000));

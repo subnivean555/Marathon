@@ -1,3 +1,4 @@
+package problems;
 
 /*
 分治法实现最大子数组和问题

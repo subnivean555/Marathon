@@ -1,4 +1,4 @@
-
+package problems;
 /*
  * 给定一个长度为2n的数组
  * {a1,a2,a3,...an,b1,b2,b3...,bn}
