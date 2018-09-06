@@ -3,7 +3,7 @@ package algoAndStructure.sort;
 public class ShellSort {
 
     public static void main(String[] args) {
-        Integer[] arr = SortTestHelper.generateRandomArray(100000, 0, 100000);
+        Integer[] arr = SortTestHelper.generateRandomArray(100_0000, 0, 100_0000);
         //Integer[] arr = SortTestHelper.generateNearlyOrderedArray(10000, 20);
         Long begin = System.currentTimeMillis();
         sort(arr, arr.length);

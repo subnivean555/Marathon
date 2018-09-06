@@ -1,200 +1,178 @@
 package algoAndStructure.linkedList;
 
-import java.util.Arrays;
-import java.util.List;
+/**
+ *  添加操作
+ *      addFirst(Element)   O(1)
+ *      addLast(Element)    O(n)
+ *      add(index, element) O(n)
+ *
+ *      removeLast(element) O(n)
+ *      removeFirst(element) O(1)
+ *      remove(element)     O(n)
+ *
+ *      get(index)          O(n)
+ *      contains(element)   O(n)
+ * @param <Element>
+ */
 
-public class MyLinkedList {
+public class MyLinkedList<Element> {
 
-    /**
-     *  将数组转为一个链表
-     * @param datas
-     * @return
-     */
-    public static Node createLinkedList(List<Integer> datas){
-        if (datas.isEmpty()){
-            return null;
+    private class Node{
+        public Element value;
+        public Node next;
+
+        public Node(Element value, Node next){
+            this.value = value;
+            this.next = next;
         }
-        Node firstNode = new Node(datas.get(0));
-        Node headOfSublist = createLinkedList(datas.subList(1, datas.size()));
-        firstNode.setNext(headOfSublist);
-        return firstNode;
+
+        public Node(Element value){
+            this(value, null);
+        }
+
+        public Node(){
+            this(null, null);
+        }
+
+        @Override
+        public String toString() {
+            return value.toString();
+        }
     }
 
-    /**
-     *  打印链表
-     * @param head
-     */
-    public static void printLinkedList(Node head){
-        while (head != null){
-            System.out.print(head.getValue()+" ");
-            head = head.getNext();
-        }
-        System.out.println();
+    private Node dummyhead;
+    private int size;
+
+    public MyLinkedList(){
+        dummyhead = new Node(null, null);
+        size = 0;
     }
 
-    /**
-     * 使用递归反转链表, 递归操作的效率并不高, 需要反复的压栈.
-     * @param head
-     * @return
-     */
-    public static Node reverseLinkedList(Node head){
-        if (head == null || head.getNext() == null){
-            return head;
-        }
-        Node newHead = reverseLinkedList(head.getNext());
-        head.getNext().setNext(head);
-        head.setNext(null);
-        return newHead;
+    public int getSize() {
+        return size;
     }
 
-    /**
-     *  使用循环的方式反转链表
-     * @param head
-     * @return
-     */
-    public static Node reverseLinkedList2(Node head){
-        Node newHead = null, curHead = head;
-        while (curHead != null){
-            Node next = curHead.getNext();
-            curHead.setNext(newHead);
-            newHead = curHead;
-            curHead = next;
-        }
-        return newHead;
+    public boolean isEmpty(){
+        return size == 0;
     }
 
-    /**
-     *  删除链表中, value 与传入参数相同的节点, 并返回删除后的头节点
-     * @param head
-     * @param value
-     * @return
-     */
-    public static Node deleteIfEquals(Node head, int value){
-        while (head != null && head.getValue() == value){
-            head = head.getNext();
-        }
-        if (head == null){
-            return null;
+    public void add(int index, Element value){
+        if (index < 0 || index > size){
+            throw new IllegalArgumentException("add failed. Illegal index");
         }
 
-        Node prev = head;
+        Node prev = dummyhead;
+        for (int i = 0; i < index; i++)
+            prev = prev.next;
 
-        while (prev.getNext() != null){
-            if (prev.getNext().getValue() == value){
-                prev.setNext(prev.getNext().getNext());
-            } else {
-                prev = prev.getNext();
+        prev.next = new Node(value, prev.next);
+        size++;
+
+    }
+
+    public void addFirst(Element value){
+        add(0, value);
+    }
+
+    public void addLast(Element value){
+        add(size, value);
+    }
+
+    public Element get(int index){
+        if (index < 0 || index > size){
+            throw new IllegalArgumentException("add failed. Illegal index");
+        }
+
+        Node cur = dummyhead.next;
+        for (int i = 0; i < index; i++){
+            cur = cur.next;
+        }
+        return cur.value;
+    }
+
+    public Element getFirst(){
+        return get(0);
+    }
+
+    public Element getLast(){
+        return get(size - 1);
+    }
+
+    public void set(int index, Element value){
+        if (index < 0 || index > size){
+            throw new IllegalArgumentException("add failed. Illegal index");
+        }
+
+        Node cur = dummyhead.next;
+        for (int i = 0; i < index; i++){
+            cur = cur.next;
+        }
+        cur.value = value;
+    }
+
+    public boolean contains(Element value){
+        Node cur = dummyhead.next;
+        while (cur != null){
+            if (cur.value == value){
+                return true;
             }
+            cur = cur.next;
         }
-        return head;
+        return false;
     }
 
-    /**
-     *  删除倒数第 N 个节点
-     * @param head
-     * @param n
-     * @return
-     */
-    public static Node removeNthFromEnd(Node head, int n){
-        if (head == null)
-            return null;
-        Node newHead = new Node(-1);
-        newHead.setNext(head);
-        Node quicker = head, slower = newHead;
-
-        while (n-- > 0){
-            quicker = quicker.getNext();
-        }
-        while (quicker != null){
-            slower = slower.getNext();
-            quicker = quicker.getNext();
+    public Element remove(int index){
+        if (index < 0 || index > size){
+            throw new IllegalArgumentException("add failed. Illegal index");
         }
 
-        slower.setNext(slower.getNext().getNext());
-        return newHead.getNext();
+        Node prev = dummyhead;
+        for (int i = 0; i < index; i++)
+            prev = prev.next;
+
+        Node retNode = prev.next;
+        prev.next = retNode.next;
+        retNode.next = null;
+        size--;
+
+        return retNode.value;
     }
 
-    /**
-     *  使用递归的方法来将两个有序链表合并为一个有序链表
-     * @param list
-     * @param list2
-     * @return
-     */
-    public static Node mergeTwoLists(Node list, Node list2){
-        if (list == null){
-            return list2;
-        }
-        if (list2 == null){
-            return list;
-        }
-        if (list.getValue() < list2.getValue()){
-            list.setNext(mergeTwoLists(list.getNext(), list2));
-            return list;
-        } else {
-            list2.setNext(mergeTwoLists(list, list2.getNext()));
-            return list2;
-        }
+    public Element removeFirst(){
+        return remove(0);
     }
 
-    public static Node mergeTwoLists2(Node list, Node list2){
-        Node head = null;
-        if (list == null){
-            return list2;
-        } else if (list2 == null){
-            return list;
-        } else if (list.getValue() <= list2.getValue()){
-            head = list;
-            list = list.getNext();
-        }else {
-            head = list2;
-            list2 = list2.getNext();
-        }
-
-        Node tmp = head;
-        while (list != null && list2 != null){
-            if (list.getValue() <= list2.getValue()){
-                tmp.setNext(list);
-                list = list.getNext();
-            } else {
-                tmp.setNext(list2);
-                list2 = list2.getNext();
-            }
-            tmp = tmp.getNext();
-        }
-
-        if (list != null)
-            tmp.setNext(list2);
-        if (list2 != null)
-            tmp.setNext(list2);
-        return head;
+    public Element removeLast(){
+        return remove(size - 1);
     }
 
-    public static Node createLargeLinkedList(int size){
-        Node prev = null;
-        Node head = null;
-        for (int i = 1; i <= size; i++){
-            Node node = new Node(i);
-            if (prev != null){
-                prev.setNext(node);
-            } else {
-                head = node;
-            }
-            prev = node;
+    @Override
+    public String toString() {
+        StringBuilder res = new StringBuilder();
+        Node cur = dummyhead.next;
+
+        while (cur != null){
+            res.append(cur + "->");
+            cur = cur.next;
         }
-        return head;
+        res.append("NULL");
+
+        return res.toString();
     }
 
     public static void main(String[] args) {
 
-        /*
-        Node list = createLinkedList(Arrays.asList(1,2,4));
-        Node list2 = createLinkedList(Arrays.asList(3,4,5));
-        printLinkedList(mergeTwoLists(list, list2));
-        printLinkedList(removeNthFromEnd(node, 1));
-        printLinkedList(createLinkedList(Arrays.asList(1)));
-        printLinkedList(createLinkedList(Arrays.asList()));
-        printLinkedList(reverseLinkedList(createLinkedList(Arrays.asList(1,2,3,4,5,6,7))));
-        printLinkedList(reverseLinkedList2(createLargeLinkedList(100)));
-        */
+        MyLinkedList<Integer> linkedList = new MyLinkedList<>();
+
+        for (int i = 0; i < 5; i++){
+            linkedList.addFirst(i);
+            System.out.println(linkedList);
+        }
+
+        linkedList.add(2, 55);
+        System.out.println(linkedList);
+        System.out.println(linkedList.contains(55));
+        linkedList.set(4, 10);
+        System.out.println(linkedList);
     }
 }

@@ -13,17 +13,17 @@ package algoAndStructure.sort;
  */
 public class QuickSort {
     public static void main(String[] args) {
-        Integer[] arr = SortTestHelper.generateRandomArray(100000,0, 100000);
+        Integer[] arr = SortTestHelper.generateRandomArray(100_0000,0, 100_0000);
         Long begin = System.currentTimeMillis();
         sort(arr);
         System.out.println("quick sort 执行的时间为 : " + (System.currentTimeMillis() - begin));
 
-        arr = SortTestHelper.generateRandomArray(100000,0, 100000);
+        arr = SortTestHelper.generateRandomArray(100_0000,0, 100_0000);
         begin = System.currentTimeMillis();
         better_sort(arr);
         System.out.println("better quick sort 执行的时间为 : " + (System.currentTimeMillis() - begin));
 
-        arr = SortTestHelper.generateRandomArray(100000, 0, 10);
+        arr = SortTestHelper.generateRandomArray(100_0000, 0, 10);
         begin = System.currentTimeMillis();
         sort3Ways(arr);
         System.out.println("quick sort 3 ways 执行的时间为 : " + (System.currentTimeMillis() - begin));

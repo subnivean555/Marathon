@@ -12,7 +12,7 @@ package algoAndStructure.sort;
 public class MergeSort {
 
     public static void main(String[] args) {
-        Integer[] arr = SortTestHelper.generateRandomArray(10_0000, 0, 10_0000);
+        Integer[] arr = SortTestHelper.generateRandomArray(100_0000, 0, 100_0000);
         //Integer[] arr = SortTestHelper.generateNearlyOrderedArray(10000, 20);
         Long begin = System.currentTimeMillis();
         sortBU(arr);
