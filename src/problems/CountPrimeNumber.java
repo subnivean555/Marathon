@@ -1,4 +1,6 @@
-package problems;/*
+package problems;
+
+/**
 输入描述: 　　输入包括多组数据。
 　　每组数据仅有一个整数n (1≤n≤10000000)。
 

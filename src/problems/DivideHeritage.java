@@ -2,7 +2,7 @@ package problems;
 
 import java.util.Scanner;
 
-/*
+/**
 ##输入描述: 　　输入包括多组测试数据。
 　　每组测试数据包括两行：
 　　第一行为m、n，分别代表老人拥有的马匹数和几个儿子。

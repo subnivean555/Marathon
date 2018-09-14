@@ -2,7 +2,7 @@ package problems;
 
 import java.util.Scanner;
 
-/*
+/**
     计算 0 —— n 之间包含1的数字的个数
  */
 public class CountSelectNum {

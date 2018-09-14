@@ -9,7 +9,6 @@ public class Basic_MaxDepth {
         }
         else
             return 1 + Math.max(maxDepth(root.right), maxDepth(root.left));
-
     }
 
 }
