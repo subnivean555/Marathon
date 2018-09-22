@@ -67,7 +67,6 @@ public class MyLinkedList<Element> {
 
         prev.next = new Node(value, prev.next);
         size++;
-
     }
 
     public void addFirst(Element value){

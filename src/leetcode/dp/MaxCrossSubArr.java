@@ -1,4 +1,4 @@
-package problems;
+package leetcode.dp;
 
 /*
 分治法实现最大子数组和问题
