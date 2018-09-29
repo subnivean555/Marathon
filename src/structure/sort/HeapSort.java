@@ -2,7 +2,6 @@ package structure.sort;
 
 import structure.heap.MaxPriorityQueue;
 
-
 /**
  * 建堆的过程中并不会对数组进行完全排序, 只有输出其 最大/小 值的过程才是对其的排序.
  *

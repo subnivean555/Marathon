@@ -70,7 +70,6 @@ public class MaxHeap<Element extends Comparable<Element>> {
     }
 
     private void siftDown(int pos) {
-
         while (leftChild(pos) < data.getSize()){
             int temp = leftChild(pos);
             /**

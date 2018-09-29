@@ -151,7 +151,7 @@ public class LinkedListAlgo {
         } else if (list.getValue() <= list2.getValue()){
             head = list;
             list = list.getNext();
-        }else {
+        } else {
             head = list2;
             list2 = list2.getNext();
         }
