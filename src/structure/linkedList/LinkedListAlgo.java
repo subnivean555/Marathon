@@ -169,7 +169,7 @@ public class LinkedListAlgo {
         }
 
         if (list != null)
-            tmp.setNext(list2);
+            tmp.setNext(list);
         if (list2 != null)
             tmp.setNext(list2);
         return head;
@@ -188,7 +188,6 @@ public class LinkedListAlgo {
 
         while (rev != null){
             if (rev.getValue() == head.getValue()){
-                System.out.println(head.getValue());
                 rev = rev.getNext();
                 head = head.getNext();
             } else {
